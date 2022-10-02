@@ -167,7 +167,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
     public BagInterface<T> union(BagInterface<T> bag) 
     {
-        BagInterface < T > result = new ResizeableArrayBag < >();
+        BagInterface <T> result = new ResizeableArrayBag < >();
         T[] array = this.toArray();
         for (T index : array) 
         {
@@ -183,8 +183,8 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
     public BagInterface<T> intersection(BagInterface<T> bag) 
     {
-        BagInterface < T > result = new ResizeableArrayBag < >();
-        BagInterface < T > finalResult = new ResizeableArrayBag < >();
+        BagInterface <T> result = new ResizeableArrayBag < >();
+        BagInterface <T> finalResult = new ResizeableArrayBag < >();
         T[] array = this.toArray();
         for (T index : array) 
         {
@@ -203,7 +203,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
     public BagInterface<T> difference(BagInterface<T> bag) 
     {
-        BagInterface < T > result = new ResizeableArrayBag < >();
+        BagInterface <T> result = new ResizeableArrayBag < >();
         T[] mine = this.toArray();
         for (T index : mine) 
         {
