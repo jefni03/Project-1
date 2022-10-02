@@ -48,7 +48,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
         }
     }
 
-    private void doubleCapacity()
+    private void doubleCapacity(T[] bag)
     {
         int newLength = 2 * bag.length;
         checkCapacity(newLength);
