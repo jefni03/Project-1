@@ -198,7 +198,16 @@ public class LinkedBag<T> implements BagInterface<T>
 
     public BagInterface<T> union(BagInterface<T> bag)
     {
-
+        LinkedBag<T> result = new LinkedBag<T>();
+        for(Node n = firstNode; n != null; n = n.next)
+        {
+            result.add(n.data);
+        }
+        for(T object : bag.toArray())
+        {
+            result.add(object)
+        }
+        return result; 
     }
 
     public BagInterface<T> intersection(BagInterface<T> bag)
