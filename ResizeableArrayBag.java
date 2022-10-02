@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class ResizeableArrayBag<T> implements BagInterface<T>
 {
-    private final T[] bag;
+    private T[] bag;
     private static final int DEFAULT_CAPACITY = 25;
     private int numberOfEntries;
     private boolean integrityOK = false;
@@ -138,6 +138,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
     public T[] toArray()
     {
+        @SuppressWarnings("unchecked")
         T[] result = (T[])new Object[numberOfEntries];
         for(int index = 0; index < numberOfEntries; index++)
         {
@@ -164,18 +165,58 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
         return result;
     }
 
-    public BagInterface<T> union(BagInterface<T> bag)
+    public BagInterface<T> union(BagInterface<T> bag) 
     {
-
+        BagInterface < T > result = new ResizeableArrayBag < >();
+        T[] array = this.toArray();
+        for (T index : array) 
+        {
+            result.add(index);
+        }
+        T[] secondBag = bag.toArray();
+        for (T index : secondBag) 
+        {
+            result.add(index);
+        }
+        return result;
     }
 
-    public BagInterface<T> intersection(BagInterface<T> bag)
+    public BagInterface<T> intersection(BagInterface<T> bag) 
     {
-
+        BagInterface < T > result = new ResizeableArrayBag < >();
+        BagInterface < T > finalResult = new ResizeableArrayBag < >();
+        T[] array = this.toArray();
+        for (T index : array) 
+        {
+            result.add(index);
+        }
+        T[] secondBag = bag.toArray();
+        for (T index : secondBag) 
+        {
+            if(result.contains(index))
+            {
+                finalResult.add(index);
+            }
+        }
+        return finalResult;
     }
 
-    public BagInterface<T> difference(BagInterface<T> bag)
+    public BagInterface<T> difference(BagInterface<T> bag) 
     {
-
+        BagInterface < T > result = new ResizeableArrayBag < >();
+        T[] mine = this.toArray();
+        for (T index : mine) 
+        {
+            result.add(index);
+        }
+        T[] secondBag = bag.toArray();
+        for (T elem : secondBag)
+        {
+            if(result.contains(elem))
+            {
+                result.remove(elem);
+            }
+        }
+        return result;
     }
 }
