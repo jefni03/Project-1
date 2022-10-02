@@ -2,20 +2,29 @@ import java.util.Arrays;
 
 public class ResizeableArrayBag<T> implements BagInterface<T>
 {
-    private T[] bag;
+    private final T[] bag;
     private static final int DEFAULT_CAPACITY = 25;
     private int numberOfEntries;
     private boolean integrityOK = false;
     private static final int MAX_CAPACITY = 10000;
 
-    public void ResizeableArrayBag()
+    public ResizeableArrayBag()
     {
-
+        this(DEFAULT_CAPACITY);
     }
 
-    public void ResizeableArrayBag(int Capacity)
+    public ResizeableArrayBag(int capacity)
     {
-        
+        if(capacity<=MAX_CAPACITY){
+            numberOfEntries=0;
+            @SuppressWarnings("unchecked")
+            T[] tempBag = (T[]) new Object[capacity];
+            bag=tempBag;
+            integrityOK = true;
+        }
+        else{
+            throw new IllegalStateException("Trying to make a bag with a capacity above the maximum.");
+        }
     }
 
     private void checkIntegrity()
