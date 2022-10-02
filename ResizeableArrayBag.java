@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class ResizeableArrayBag<T> implements BagInterface<T>
 {
-    private final T[] bag;
+    private T[] bag;
     private static final int DEFAULT_CAPACITY = 25;
     private int numberOfEntries;
     private boolean integrityOK = false;
@@ -166,7 +166,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
     public T union(T bag)
     {
-
+        
     }
 
     public T intersection(T bag)
