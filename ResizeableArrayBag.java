@@ -90,17 +90,17 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
     }
 
-    public T union(T bag)
+    public BagInterface<T> union(BagInterface<T> bag)
     {
 
     }
 
-    public T intersection(T bag)
+    public BagInterface<T> intersection(BagInterface<T> bag)
     {
 
     }
 
-    public T difference(T bag)
+    public BagInterface<T> difference(BagInterface<T> bag)
     {
 
     }

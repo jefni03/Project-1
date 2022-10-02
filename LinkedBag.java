@@ -196,7 +196,7 @@ public class LinkedBag<T> implements BagInterface<T>
         return array;
     }
 
-    public T union(T bag)
+    public BagInterface<T> union(BagInterface<T> bag)
     {
         LinkedBag<T> result = new LinkedBag<T>();
         for(Node n = firstNode; n != null; n = n.next)
@@ -210,12 +210,12 @@ public class LinkedBag<T> implements BagInterface<T>
         return result; 
     }
 
-    public T intersection(T bag)
+    public BagInterface<T> intersection(BagInterface<T> bag)
     {
 
     }
 
-    public T difference(T bag)
+    public Baginterface<T> difference(BagInterface<T> bag)
     {
 
     }
