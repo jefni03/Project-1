@@ -1,107 +1,181 @@
-// public class ResizeableArrayBag<T> implements BagInterface<T>
-// {
-//     private final T[] bag;
-//     private static final int defaultCapacity = 25;
-//     private int numberOfEntries;
-//     private boolean integrityOK;
+import java.util.Arrays;
 
-//     public void ArrayBag()
-//     {
+public class ResizeableArrayBag<T> implements BagInterface<T>
+{
+    private final T[] bag;
+    private static final int DEFAULT_CAPACITY = 25;
+    private int numberOfEntries;
+    private boolean integrityOK = false;
+    private static final int MAX_CAPACITY = 10000;
 
-//     }
+    public ResizeableArrayBag()
+    {
+        this(DEFAULT_CAPACITY);
+    }
 
-//     public void ArrayBag(int Capacity)
-//     {
+    public ResizeableArrayBag(int capacity)
+    {
+        if(capacity<=MAX_CAPACITY){
+            numberOfEntries=0;
+            @SuppressWarnings("unchecked")
+            T[] tempBag = (T[]) new Object[capacity];
+            bag=tempBag;
+            integrityOK = true;
+        }
+        else{
+            throw new IllegalStateException("Trying to make a bag with a capacity above the maximum.");
+        }
+    }
 
-//     }
+    private void checkIntegrity()
+    {
+      if(!integrityOK)
+      {
+        throw new SecurityException("ArrayBag object is corrupt.");
+      }
+    }
 
-//     private void checkIntegrity()
-//     {
-//         if(!integrityOK)
-//         {
-//             throw new SecurityException("ArrayBag object is corrupt");
-//         }
-//     }
+    public int getCurrentSize()
+    {
+        return numberOfEntries;
+    }
 
-//     public int getCurrentSize()
-//     {
+    private void checkCapacity(int capacity)
+    {
+        if(capacity > MAX_CAPACITY)
+        {
+            throw new IllegalStateException("Attempt to create a bag whose capacity exeeds allowed maximum of " + MAX_CAPACITY);
+        }
+    }
 
-//     }
+    private void doubleCapacity()
+    {
+        int newLength = 2 * bag.length;
+        checkCapacity(newLength);
+        bag = Arrays.copyOf(bag, newLength);
+    }
 
-//     public boolean isEmpty()
-//     {
+    public boolean add(T newEntry)
+    {
+        checkIntegrity();
+        boolean result = true;
+        if(isArrayFull())
+        {
+            result = false;
+        }
+        else
+        {
+            bag[numberOfEntries] = newEntry;
+            numberOfEntries++;
+        }
+        return result;
+    }
 
-//     }
+    public T remove()
+    {
+        checkIntegrity();
+        T result = removeEntry(numberOfEntries - 1);
+        return result;
+    }
 
-//     private void checkCapacity(int capacity)
-//     {
-//         if(capacity > MAX_CAPACITY)
-//         {
-//             throw new illegalStateException("Attempt to create a bag whose capacity exeeds allowed maximum of " + MAX_CAPACITY);
-//         }
-//     }
+    public boolean remove(T anEntry)
+    {
+        checkIntegrity();
+        int index = getIndexOf(anEntry);
+        T result = removeEntry(index);
+        return anEntry.equals(result);
+    }
 
-//     private void doubleCapacity()
-//     {
-//         int newLength = 2*bag.length;
-//         checkCapacity(newLength);
-//         bag = Arrays.copyOf(bag, newLength);
-//     }
+    public boolean isEmpty()
+    {
+        return numberOfEntries == 0;
+    }
 
-//     public boolean add(T newEntry)
-//     {
-//         checkIntegrity();
-//         boolean result = true;
-//         if(isArrayFull())
-//         {
-//             doubleCapacity();
-//         }
-//         bag[numberOfEntries] = newEntry;
-//         numberOfEntries++;
-//     }
+    public void clear()
+    {
+        while(!isEmpty())
+            remove();
+    }
 
-//     public T remove()
-//     {
+    public int getFrequencyOf(T anEntry)
+    {
+        checkIntegrity();
+        int counter = 0;
 
-//     }
+        for(int index = 0; index < numberOfEntries; index++)
+        {
+            if(anEntry.equals(bag[index]))
+            {
+                counter++;
+            }
+        }
+        return counter;
+    }
 
-//     public boolean remove(T entry)
-//     {
+    private int getIndexOf(T anEntry)
+    {
+        int where = -1;
+        boolean found = false;
+        int index = 0;
 
-//     }
+        while(!found && (index<numberOfEntries))
+        {
+            if(anEntry.equals(bag[index]))
+            {
+                found = true;
+                where = index;
+            }
+            index++;
+        }
+        return where;
+    }
 
-//     public void clear()
-//     {
+    public boolean contains(T anEntry)
+    {
+        checkIntegrity();
+        return getIndexOf(anEntry)>-1;
+    }
 
-//     }
+    public T[] toArray()
+    {
+        T[] result = (T[])new Object[numberOfEntries];
+        for(int index = 0; index < numberOfEntries; index++)
+        {
+            result[index] = bag[index];
+        }
+        return result;
+    }
 
-//     public int getFrequencyOf(T entry)
-//     {
+    private boolean isArrayFull()
+    {
+        return numberOfEntries == bag.length;
+    }
 
-//     }
+    private T removeEntry(int givenIndex)
+    {
+        T result = null;
+        if(!isEmpty() && (givenIndex >= 0))
+        {
+            result = bag[givenIndex];
+            bag[givenIndex] = bag[numberOfEntries - 1];
+            bag[numberOfEntries - 1] = null;
+            numberOfEntries--;
+        }
+        return result;
+    }
 
-//     public boolean contains(T entry)
-//     {
+    public T union(T bag)
+    {
 
-//     }
+    }
 
-//     public T[] toArray()
-//     {
+    public T intersection(T bag)
+    {
 
-//     }
+    }
 
-//     public BagInterface<T> union(BagInterface<T> bag)
-//     {
+    public T difference(T bag)
+    {
 
-//     }
-
-//     public BagInterface<T> intersection(BagInterface<T> bag)
-//     {
-
-//     }
-
-//     public BagInterface<T> difference(BagInterface<T> bag)
-//     {
-
-//     }
-// }
+    }
+}
