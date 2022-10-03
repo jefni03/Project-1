@@ -198,7 +198,7 @@ public class LinkedBag<T> implements BagInterface<T>
 
     public BagInterface<T> union(BagInterface<T> bag)
     {
-        LinkedBag<T> result = new LinkedBag<T>();
+        BagInterface<T> result = new LinkedBag<T>();
         for(Node n = firstNode; n != null; n = n.next)
         {
             result.add(n.data);
@@ -212,12 +212,41 @@ public class LinkedBag<T> implements BagInterface<T>
 
     public BagInterface<T> intersection(BagInterface<T> bag)
     {
-
-    }
+        BagInterface < T > result = new LinkedBag < >();
+        BagInterface < T > endResult = new LinkedBag < >();
+        T[] array = this.toArray();
+        for (T object : array) 
+        {
+            result.add(object);
+        }
+        T[] array2 = bag.toArray();
+        for (T object : array2) {
+        if(result.contains(object))
+        {
+        endResult.add(object);
+        }
+        }
+        return endResult;
+        }
+    
 
     public BagInterface<T> difference(BagInterface<T> bag)
     {
-
+        BagInterface < T > result = new LinkedBag < >();
+        T[] array = this.toArray();
+        for (T object : array) 
+        {
+        result.add(object);
+        }
+        T[] array2 = bag.toArray();
+        for (T object : array2) 
+        {
+        if(result.contains(object))
+        {
+        result.remove(object);
+        }
+        }
+        return result;
     }
 
     /**
