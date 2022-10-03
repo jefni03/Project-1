@@ -16,10 +16,10 @@ public class LinkedBagTest {
         BagInterface<Integer> unionExpect = new LinkedBag<Integer>(); //creates an expected answer key of (3,3,4,5,3,4,6)
             unionExpect.add(3);
             unionExpect.add(3);
-            unionExpect.add(3);
-            unionExpect.add(4);
             unionExpect.add(4);
             unionExpect.add(5);
+            unionExpect.add(3);
+            unionExpect.add(4);
             unionExpect.add(6);
         BagInterface<Integer> bag1 = new LinkedBag<Integer>();   //creates a linked bag1 of (3,3,4,5)
             bag1.add(3);
