@@ -205,7 +205,7 @@ public class LinkedBag<T> implements BagInterface<T>
         }
         for(T object : bag.toArray())
         {
-            result.add(object)
+            result.add(object);
         }
         return result; 
     }

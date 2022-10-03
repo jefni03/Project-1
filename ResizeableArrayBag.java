@@ -167,41 +167,41 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
     public BagInterface<T> union(BagInterface<T> bag) 
     {
-        BagInterface <T> result = new ResizeableArrayBag < >();
-        T[] array = this.toArray();
-        for (T index : array) 
-        {
-            result.add(index);
+        BagInterface<T> result = new ResizeableArrayBag<T>();
+        for(T bagOneData:this.toArray()){
+            result.add(bagOneData);
         }
-        T[] secondBag = bag.toArray();
-        for (T index : secondBag) 
-        {
-            result.add(index);
+        for(T bagTwoData:bag.toArray()){
+            result.add(bagTwoData);
         }
         return result;
     }
 
-    public BagInterface<T> intersection(BagInterface<T> bag) 
+      
+    public BagInterface<T> intersection(BagInterface<T> bag)
     {
-        BagInterface <T> result = new ResizeableArrayBag < >();
-        BagInterface <T> finalResult = new ResizeableArrayBag < >();
-        T[] array = this.toArray();
-        for (T index : array) 
-        {
-            result.add(index);
+        BagInterface<T> result = new ResizeableArrayBag<>();
+        @SuppressWarnings("unchecked")
+        T[] bagTwoArrayCopy = (T[]) new Object[bag.getCurrentSize()];
+        T[] bagOneArray = this.toArray();
+        T[] bagTwoArray = bag.toArray();
+        for(int i=0; i<bag.getCurrentSize(); i++){
+            bagTwoArrayCopy[i]=bagTwoArray[i];
         }
-        T[] secondBag = bag.toArray();
-        for (T index : secondBag) 
-        {
-            if(result.contains(index))
-            {
-                finalResult.add(index);
+
+        for(int i=0; i<this.getCurrentSize(); i++){
+            for(int j=0; j<bag.getCurrentSize(); j++){
+                if(bagOneArray[i]==bagTwoArrayCopy[j]){
+                    result.add(bagOneArray[i]);
+                    bagTwoArrayCopy[j]=null;
+                    break;
+                }
             }
         }
-        return finalResult;
+        return result;
     }
 
-    public BagInterface<T> difference(BagInterface<T> bag) 
+    public BagInterface<T> difference(BagInterface<T> bag)
     {
         BagInterface <T> result = new ResizeableArrayBag < >();
         T[] array = this.toArray();
