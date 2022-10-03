@@ -204,17 +204,17 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     public BagInterface<T> difference(BagInterface<T> bag) 
     {
         BagInterface <T> result = new ResizeableArrayBag < >();
-        T[] mine = this.toArray();
-        for (T index : mine) 
+        T[] array = this.toArray();
+        for (T index : array) 
         {
             result.add(index);
         }
         T[] secondBag = bag.toArray();
-        for (T elem : secondBag)
+        for (T index : secondBag)
         {
-            if(result.contains(elem))
+            if(result.contains(index))
             {
-                result.remove(elem);
+                result.remove(index);
             }
         }
         return result;
