@@ -15,10 +15,10 @@ public class BagDriver
     bag2.add("e");
 
     System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-
     System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-
     System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
+    System.out.println(Arrays.toString(bag2.difference(bag1).toArray()));
+
     
     BagInterface <String> bag3 = new ResizeableArrayBag <String>();
     BagInterface <String> bag4 = new ResizeableArrayBag <String>();
@@ -34,6 +34,7 @@ public class BagDriver
     System.out.println(Arrays.toString(bag3.union(bag4).toArray()));
     System.out.println(Arrays.toString(bag3.intersection(bag4).toArray()));
     System.out.println(Arrays.toString(bag3.difference(bag4).toArray()));
+    System.out.println(Arrays.toString(bag4.difference(bag3).toArray()));
     }
 }
 
