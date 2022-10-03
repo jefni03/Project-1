@@ -220,11 +220,12 @@ public class LinkedBag<T> implements BagInterface<T>
             result.add(object);
         }
         T[] array2 = bag.toArray();
-        for (T object : array2) {
-        if(result.contains(object))
+        for (T object : array2) 
         {
-        endResult.add(object);
-        }
+            if(result.contains(object))
+            {
+            endResult.add(object);
+            }
         }
         return endResult;
         }
@@ -241,10 +242,10 @@ public class LinkedBag<T> implements BagInterface<T>
         T[] array2 = bag.toArray();
         for (T object : array2) 
         {
-        if(result.contains(object))
-        {
-        result.remove(object);
-        }
+            if(result.contains(object))
+            {
+            result.remove(object);
+            }
         }
         return result;
     }
