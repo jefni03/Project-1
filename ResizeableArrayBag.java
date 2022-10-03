@@ -165,17 +165,40 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
         return result;
     }
 
-    public T union(T bag)
+    public BagInterface<T> union(BagInterface<T> bag)
     {
-
+        BagInterface<T> result = new ResizeableArrayBag<T>();
+        for(T bagOneData:this.toArray()){
+            result.add(bagOneData);
+        }
+        for(T bagTwoData:bag.toArray()){
+            result.add(bagTwoData);
+        }
+        return result;
     }
 
-    public T intersection(T bag)
+    
+    //make copy of bag2
+    //for i , go through bag1
+        
+    public BagInterface<T> intersection(BagInterface<T> bag)
     {
+        T[] bagOneArray = this.toArray();
 
+        T[] bagOneArray = this.toArray();
+        for(int i=0; i<this.getCurrentSize(); i++){
+            for(int j=0; j<bag.getCurrentSize(); j++){
+                if(bagOneArray[i]==bagTwoArray[j]){
+                    result.add(bagOneArray[i]);
+                    //remove bagTwoArray[j]
+                    //break
+                }
+            }
+        }
+        return result;
     }
 
-    public T difference(T bag)
+    public BagInterface<T> difference(BagInterface<T> bag)
     {
 
     }
