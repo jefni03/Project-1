@@ -1,225 +1,245 @@
-import java.util.Arrays;
-
-public class ResizeableArrayBag<T> implements BagInterface<T>
+import static org.junit.Assert.assertArrayEquals;
+import org.junit.Test;
+public class ResizeableArrayBagTest 
 {
-    private T[] bag;
-    private static final int DEFAULT_CAPACITY = 25;
-    private int numberOfEntries;
-    private boolean integrityOK = false;
-    private static final int MAX_CAPACITY = 10000;
+ //                ~~~UNION TEST~~~
 
-    public ResizeableArrayBag()
-    {
-        this(DEFAULT_CAPACITY);
+    /*
+     * Tests union() on ResizableArrayBags
+     * given bag1={3,3,4,5}  bag2={3,4,6}
+     * expected union() result is {3,3,4,5,3,4,6}
+     * !!!order of numbers may differ depending on algorithm!!!
+     */
+    @Test
+    public void shouldGiveUnionResizArrayBag(){
+        BagInterface<Integer> unionExpect = new ResizeableArrayBag<Integer>(); //creates an expected answer key of (3,3,4,5,3,4,6)
+            unionExpect.add(3);
+            unionExpect.add(3);
+            unionExpect.add(4);
+            unionExpect.add(5);
+            unionExpect.add(3);
+            unionExpect.add(4);
+            unionExpect.add(6);
+        BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();   //creates a resiz array bag1 of (3,3,4,5)
+            bag1.add(3);
+            bag1.add(3);
+            bag1.add(4);
+            bag1.add(5);
+        BagInterface<Integer> bag2 = new ResizeableArrayBag<Integer>();  //creates a resiz array bag2 of (3,4,6)
+            bag2.add(3);
+            bag2.add(4);
+            bag2.add(6);
+        BagInterface<Integer> unionActual = bag1.union(bag2);     //calculates the actual union of bag1 and bag2
+        assertArrayEquals(unionExpect.toArray(), unionActual.toArray()); 
     }
 
-    public ResizeableArrayBag(int capacity)
-    {
-        if(capacity<=MAX_CAPACITY){
-            numberOfEntries=0;
-            @SuppressWarnings("unchecked")
-            T[] tempBag = (T[]) new Object[capacity];
-            bag=tempBag;
-            integrityOK = true;
-        }
-        else{
-            throw new IllegalStateException("Trying to make a bag with a capacity above the maximum.");
-        }
+
+    //              ~~~INTERSECTION TESTS~~~
+
+    /*
+     * Tests intersection() on ResizeableArrayBags when both bags have a repeated entry in a row
+     * given bag1={1,2,2,2,3,2}  bag2={2,2,4,3,2}
+     * expected intersection() result is {2,2,2,3}
+     */
+    @Test
+    public void shouldGiveIntersectBothResizArrayBagsHaveRow(){
+        BagInterface<Integer> intersectExpect = new ResizeableArrayBag<Integer>();   //creates an expected answer key of 2,2,2,3
+            intersectExpect.add(2);
+            intersectExpect.add(2);
+            intersectExpect.add(2);
+            intersectExpect.add(3);
+        BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();     //creates a resiz array bag1 of (1,2,2,2,3,2)
+            bag1.add(1);
+            bag1.add(2);
+            bag1.add(2);
+            bag1.add(2);
+            bag1.add(3);
+            bag1.add(2);
+        BagInterface<Integer> bag2 = new ResizeableArrayBag<Integer>();    //creates resiz array bag2 of (2,2,4,3,2)
+            bag2.add(2);
+            bag2.add(2);
+            bag2.add(4);
+            bag2.add(3);
+            bag2.add(2);
+            BagInterface<Integer> intersectActual = bag1.intersection(bag2); //calculates the actual intersection of bag1 and bag2
+            assertArrayEquals(intersectExpect.toArray(), intersectActual.toArray());
     }
 
-    private void checkIntegrity()
-    {
-      if(!integrityOK)
-      {
-        throw new SecurityException("ArrayBag object is corrupt.");
-      }
+    /*
+     * Tests intersection() on ResizableArrayBags when only bag1 has a repeated entry in a row
+     * given bag1={1,2,2,2}  bag2={2,1,3,2}
+     * expected intersection() result is {1,2,2}
+     */
+    @Test
+    public void shouldGiveIntersectResizArrayBag1HasRow(){
+        BagInterface<Integer> intersectExpect = new ResizeableArrayBag<Integer>(); //creates an expected answer key of (1,2,2)
+            intersectExpect.add(1);
+            intersectExpect.add(2);
+            intersectExpect.add(2);
+        BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();   //creates a resiz array bag1 of (1,2,2,2)
+            bag1.add(1);
+            bag1.add(2);
+            bag1.add(2);
+            bag1.add(2);
+        BagInterface<Integer> bag2 = new ResizeableArrayBag<Integer>();  //creates a resiz array bag2 of (2,1,3,2)
+            bag2.add(2);
+            bag2.add(1);
+            bag2.add(3);
+            bag2.add(2);
+        BagInterface<Integer> intersectActual = bag1.intersection(bag2);     //calculates the actual intersection of bag1 and bag2
+        assertArrayEquals(intersectExpect.toArray(), intersectActual.toArray());
     }
 
-    public int getCurrentSize()
-    {
-        return numberOfEntries;
+    /*
+     * Tests intersection() on ResizableArrayBags when only bag2 has a repeated entry in a row
+     * given bag1={1,2,3,4}  bag2={1,2,2,1,1}
+     * expected intersection() result is {1,2}
+     */
+    @Test
+    public void shouldGiveIntersectResizArrayBag2HasRow(){
+        BagInterface<Integer> intersectExpect = new ResizeableArrayBag<Integer>(); //creates an expected answer key of (1,2)
+            intersectExpect.add(1);
+            intersectExpect.add(2);
+        BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();   //creates a resiz array bag1 of (1,2,3,4)
+            bag1.add(1);
+            bag1.add(2);
+            bag1.add(3);
+            bag1.add(4);
+        BagInterface<Integer> bag2 = new ResizeableArrayBag<Integer>();  //creates a resiz array bag2 of (1,2,2,1,1)
+            bag2.add(1);
+            bag2.add(2);
+            bag2.add(2);
+            bag2.add(1);
+            bag2.add(1);
+        BagInterface<Integer> intersectActual = bag1.intersection(bag2);     //calculates the actual intersection of bag1 and bag2
+        assertArrayEquals(intersectExpect.toArray(), intersectActual.toArray());
     }
 
-    private void checkCapacity(int capacity)
-    {
-        if(capacity > MAX_CAPACITY)
-        {
-            throw new IllegalStateException("Attempt to create a bag whose capacity exeeds allowed maximum of " + MAX_CAPACITY);
-        }
+    /*
+     * Tests intersection() on ResizeableArrayBags when both bags don't have a repeated entry in a row
+     * given bag1={1,2,3,4}  bag2={3,4,5,4}
+     * expected intersection() result is {3,4}
+     */
+    @Test
+    public void shouldGiveIntersectBothResizArrayBagsNoRow(){
+        BagInterface<Integer> intersectExpect = new ResizeableArrayBag<Integer>(); //creates an expected answer key of (3,4)
+            intersectExpect.add(3);
+            intersectExpect.add(4);
+        BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();   //creates a resiz array bag1 of  (1,2,3,4)
+            bag1.add(1);
+            bag1.add(2);
+            bag1.add(3);
+            bag1.add(4);
+        BagInterface<Integer> bag2 = new ResizeableArrayBag<Integer>();  //creates a resiz array bag2 of (3,4,5,4)
+            bag2.add(3);
+            bag2.add(4);
+            bag2.add(5);
+            bag2.add(4);
+        BagInterface<Integer> intersectActual = bag1.intersection(bag2);     //calculates the actual intersection of bag1 and bag2
+        assertArrayEquals(intersectExpect.toArray(), intersectActual.toArray());
     }
 
-    private void doubleCapacity()
-    {
-        int newLength = 2 * bag.length;
-        checkCapacity(newLength);
-        bag = Arrays.copyOf(bag, newLength);
+
+    //                ~~~DIFFERENCE TESTS~~~
+
+    /*
+     * Tests difference() on ResizeableArrayBags when both bags have repeated entry in a row
+     * given bag1={1,2,2,3,4}  bag2={2,2,3,3,4}
+     * expected difference() result is {1,4}     
+    */
+    @Test
+    public void shouldGiveDifferenceBothResizArrayBagsHaveRow(){
+        BagInterface<Integer> differenceExpect = new ResizeableArrayBag<Integer>();      //creates an expected answer key of (1)
+            differenceExpect.add(1);
+        BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag1 of (1,2,2,3,4)
+            bag1.add(1);
+            bag1.add(2);
+            bag1.add(2);
+            bag1.add(3);
+            bag1.add(4);
+        BagInterface<Integer> bag2 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag2 of (2,2,3,3,4)
+            bag2.add(2);
+            bag2.add(2);
+            bag2.add(3);
+            bag2.add(3);
+            bag2.add(4);
+        BagInterface<Integer> differenceActual = bag1.difference(bag2);     //calculates the actual difference of bag1 and bag2
+        assertArrayEquals(differenceExpect.toArray(), differenceActual.toArray());
+    }
+    
+    /*
+     * Tests difference() on ResizeableArrayBags when only bag1 has repeated entry in a row
+     * given bag1={1,2,2,3,3}  bag2={1,2,3,4,2}
+     * expected difference() result is {3}
+     */
+    @Test
+    public void shouldGiveDifferenceLinkedBag1HasRow(){
+        BagInterface<Integer> differenceExpect = new ResizeableArrayBag<Integer>();      //creates an expected answer key of (3)
+            differenceExpect.add(3);
+        BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag1 of (1,2,2,3,3)
+            bag1.add(1);
+            bag1.add(2);
+            bag1.add(2);
+            bag1.add(3);
+            bag1.add(3);
+        BagInterface<Integer> bag2 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag2 of (1,2,3,4,2)
+            bag2.add(1);
+            bag2.add(2);
+            bag2.add(3);
+            bag2.add(4);
+            bag2.add(2);
+        BagInterface<Integer> differenceActual = bag1.difference(bag2);     //calculates the actual difference of bag1 and bag2
+        assertArrayEquals(differenceExpect.toArray(), differenceActual.toArray());
     }
 
-    public boolean add(T newEntry)
-    {
-        checkIntegrity();
-        boolean result = true;
-        if(isArrayFull())
-        {
-            doubleCapacity();
-        }
-        else
-        {
-            bag[numberOfEntries] = newEntry;
-            numberOfEntries++;
-        }
-        return result;
+    /*
+     * Tests difference() on ResizeableArrayBags when only bag2 has repeated entry in a row
+     * given bag1={1,2,1,3,1}  bag2={1,2,2,1,3,3}
+     * expected difference() result is {1}
+     */
+    @Test
+    public void shouldGiveDifferenceLinkedBag2HasRow(){
+        BagInterface<Integer> differenceExpect = new ResizeableArrayBag<Integer>();      //creates an expected answer key of (1)
+            differenceExpect.add(1);
+        BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag1 of (1,2,1,3,1)
+            bag1.add(1);
+            bag1.add(2);
+            bag1.add(1);
+            bag1.add(3);
+            bag1.add(1);
+        BagInterface<Integer> bag2 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag2 of (1,2,2,1,3,3) 
+            bag2.add(1);
+            bag2.add(2);
+            bag2.add(2);
+            bag2.add(1);
+            bag2.add(3);
+            bag2.add(3);
+        BagInterface<Integer> differenceActual = bag1.difference(bag2);     //calculates the actual difference of bag1 and bag2
+        assertArrayEquals(differenceExpect.toArray(), differenceActual.toArray());
     }
 
-    public T remove()
-    {
-        checkIntegrity();
-        T result = removeEntry(numberOfEntries - 1);
-        return result;
-    }
-
-    public boolean remove(T anEntry)
-    {
-        checkIntegrity();
-        int index = getIndexOf(anEntry);
-        T result = removeEntry(index);
-        return anEntry.equals(result);
-    }
-
-    public boolean isEmpty()
-    {
-        return numberOfEntries == 0;
-    }
-
-    public void clear()
-    {
-        while(!isEmpty())
-            remove();
-    }
-
-    public int getFrequencyOf(T anEntry)
-    {
-        checkIntegrity();
-        int counter = 0;
-
-        for(int index = 0; index < numberOfEntries; index++)
-        {
-            if(anEntry.equals(bag[index]))
-            {
-                counter++;
-            }
-        }
-        return counter;
-    }
-
-    private int getIndexOf(T anEntry)
-    {
-        int where = -1;
-        boolean found = false;
-        int index = 0;
-
-        while(!found && (index<numberOfEntries))
-        {
-            if(anEntry.equals(bag[index]))
-            {
-                found = true;
-                where = index;
-            }
-            index++;
-        }
-        return where;
-    }
-
-    public boolean contains(T anEntry)
-    {
-        checkIntegrity();
-        return getIndexOf(anEntry)>-1;
-    }
-
-    public T[] toArray()
-    {
-        @SuppressWarnings("unchecked")
-        T[] result = (T[])new Object[numberOfEntries];
-        for(int index = 0; index < numberOfEntries; index++)
-        {
-            result[index] = bag[index];
-        }
-        return result;
-    }
-
-    private boolean isArrayFull()
-    {
-        return numberOfEntries == bag.length;
-    }
-
-    private T removeEntry(int givenIndex)
-    {
-        T result = null;
-        if(!isEmpty() && (givenIndex >= 0))
-        {
-            result = bag[givenIndex];
-            bag[givenIndex] = bag[numberOfEntries - 1];
-            bag[numberOfEntries - 1] = null;
-            numberOfEntries--;
-        }
-        return result;
-    }
-
-    public BagInterface<T> union(BagInterface<T> bag) 
-    {
-        BagInterface <T> result = new ResizeableArrayBag < >();
-        T[] array = this.toArray();
-        for (T index : array) 
-        {
-            result.add(index);
-        }
-        T[] secondBag = bag.toArray();
-        for (T index : secondBag) 
-        {
-            result.add(index);
-        }
-        return result;
-    }
-
-    public BagInterface<T> intersection(BagInterface<T> bag) 
-    {
-        BagInterface<T> result = new ResizeableArrayBag<>();
-        @SuppressWarnings("unchecked")
-        T[] bagTwoArrayCopy = (T[]) new Object[bag.getCurrentSize()];
-        T[] bagOneArray = this.toArray();
-        T[] bagTwoArray = bag.toArray();
-        for(int i=0; i<bag.getCurrentSize(); i++){
-            bagTwoArrayCopy[i]=bagTwoArray[i];
-        }
-
-        for(int i=0; i<this.getCurrentSize(); i++){
-            for(int j=0; j<bag.getCurrentSize(); j++){
-                if(bagOneArray[i]==bagTwoArrayCopy[j]){
-                    result.add(bagOneArray[i]);
-                    bagTwoArrayCopy[j]=null;
-                    break;
-                }
-            }
-        }
-        return result;
-    }
-
-    public BagInterface<T> difference(BagInterface<T> bag) 
-    {
-        BagInterface <T> result = new ResizeableArrayBag < >();
-        T[] array = this.toArray();
-        for (T index : array) 
-        {
-            result.add(index);
-        }
-        T[] secondBag = bag.toArray();
-        for (T index : secondBag)
-        {
-            if(result.contains(index))
-            {
-                result.remove(index);
-            }
-        }
-        return result;
+    /*
+     * Tests difference() on ResizableArrayBags when both bags don't have repeated entry in a row
+     * given bag1={1,2,3,4,2}  bag2={2,3,4,2,3}
+     * expected difference() result is {1}
+     */
+    @Test
+    public void shouldGiveDifferenceLinkedBagBothNoRow(){
+        BagInterface<Integer> differenceExpect = new ResizeableArrayBag<Integer>();      //creates an expected answer key of (1)
+            differenceExpect.add(1);
+        BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag1 of (1,2,3,4,2)
+            bag1.add(1);
+            bag1.add(2);
+            bag1.add(3);
+            bag1.add(4);
+            bag1.add(2);
+        BagInterface<Integer> bag2 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag2 of (2,3,4,2,3)
+            bag2.add(2);
+            bag2.add(3);
+            bag2.add(4);
+            bag2.add(2);
+            bag2.add(3);
+        BagInterface<Integer> differenceActual = bag1.difference(bag2);     //calculates the actual difference of bag1 and bag2
+        assertArrayEquals(differenceExpect.toArray(), differenceActual.toArray());
     }
 }
