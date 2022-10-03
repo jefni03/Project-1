@@ -4,7 +4,7 @@
 ##
 ##
 # _Group Member Names_
-## Jefferey Ni
+## Jeffrey Ni
 ## Justin Nguyen
 ## Peter Nguyen
 ##
