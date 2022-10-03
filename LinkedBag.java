@@ -198,17 +198,58 @@ public class LinkedBag<T> implements BagInterface<T>
 
     public BagInterface<T> union(BagInterface<T> bag)
     {
-
+        BagInterface <T> result = new LinkedBag <>();
+        for (T obj : bag.toArray()) 
+        {
+        result.add(obj);
+        }
+        for (T obj : this.toArray())
+        {
+            result.add(obj);
+        }
+        return result;
     }
 
     public BagInterface<T> intersection(BagInterface<T> bag)
     {
+        BagInterface<T> result = new LinkedBag<T>();
+        @SuppressWarnings("unchecked")
+        T[] bagTwoArrayCopy = (T[]) new Object[bag.getCurrentSize()];
+        T[] bagOneArray = this.toArray();
+        T[] bagTwoArray = bag.toArray();
+        for(int i=0; i<bag.getCurrentSize(); i++){
+            bagTwoArrayCopy[i]=bagTwoArray[i];
+        }
 
+        for(int i=0; i<this.getCurrentSize(); i++){
+            for(int j=0; j<bag.getCurrentSize(); j++){
+                if(bagOneArray[i]==bagTwoArrayCopy[j]){
+                    result.add(bagOneArray[i]);
+                    bagTwoArrayCopy[j]=null;
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
-    public Baginterface<T> difference(BagInterface<T> bag)
+    public BagInterface<T> difference(BagInterface<T> bag)
     {
-
+        BagInterface <T> result = new LinkedBag<>();
+        T[] array = this.toArray();
+        for (T object : array) 
+        {
+        result.add(object);
+        }
+        T[] array2 = bag.toArray();
+        for (T object : array2) 
+        {
+            if(result.contains(object))
+            {
+            result.remove(object);
+            }
+        }
+        return result;
     }
 
     /**
