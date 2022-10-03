@@ -215,7 +215,7 @@ public class LinkedBag<T> implements BagInterface<T>
 
     }
 
-    public Baginterface<T> difference(BagInterface<T> bag)
+    public BagInterface<T> difference(BagInterface<T> bag)
     {
 
     }
