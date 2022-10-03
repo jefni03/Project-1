@@ -165,6 +165,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
         return result;
     }
 
+
     public BagInterface<T> union(BagInterface<T> bag)
     {
         BagInterface<T> result = new ResizeableArrayBag<T>();
@@ -177,21 +178,24 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
         return result;
     }
 
-    
-    //make copy of bag2
-    //for i , go through bag1
-        
+      
     public BagInterface<T> intersection(BagInterface<T> bag)
     {
+        BagInterface<T> result = new ResizeableArrayBag<>();
+        @SuppressWarnings("unchecked")
+        T[] bagTwoArrayCopy = (T[]) new Object[bag.getCurrentSize()];
         T[] bagOneArray = this.toArray();
+        T[] bagTwoArray = bag.toArray();
+        for(int i=0; i<bag.getCurrentSize(); i++){
+            bagTwoArrayCopy[i]=bagTwoArray[i];
+        }
 
-        T[] bagOneArray = this.toArray();
         for(int i=0; i<this.getCurrentSize(); i++){
             for(int j=0; j<bag.getCurrentSize(); j++){
-                if(bagOneArray[i]==bagTwoArray[j]){
+                if(bagOneArray[i]==bagTwoArrayCopy[j]){
                     result.add(bagOneArray[i]);
-                    //remove bagTwoArray[j]
-                    //break
+                    bagTwoArrayCopy[j]=null;
+                    break;
                 }
             }
         }
