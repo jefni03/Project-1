@@ -25,7 +25,7 @@
 ##
 ##
 # _Youtube Video Link_
-## <insert link here>
+## Put link here
 ##
 ##
 ##
