@@ -138,6 +138,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
     public T[] toArray()
     {
+        @SuppressWarnings("unchecked")
         T[] result = (T[])new Object[numberOfEntries];
         for(int index = 0; index < numberOfEntries; index++)
         {
