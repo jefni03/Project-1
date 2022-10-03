@@ -208,11 +208,11 @@ public class LinkedBag<T> implements BagInterface<T>
             result.add(obj);
         }
         return result;
-    } 
+    }
 
     public BagInterface<T> intersection(BagInterface<T> bag)
     {
-        BagInterface<T> result = new ResizeableArrayBag<>();
+        BagInterface<T> result = new LinkedBag<T>();
         @SuppressWarnings("unchecked")
         T[] bagTwoArrayCopy = (T[]) new Object[bag.getCurrentSize()];
         T[] bagOneArray = this.toArray();
@@ -231,12 +231,11 @@ public class LinkedBag<T> implements BagInterface<T>
             }
         }
         return result;
-        }
-    
+    }
 
     public BagInterface<T> difference(BagInterface<T> bag)
     {
-        BagInterface <T> result = new LinkedBag <>();
+        BagInterface <T> result = new LinkedBag<>();
         T[] array = this.toArray();
         for (T object : array) 
         {

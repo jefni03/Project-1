@@ -173,7 +173,7 @@ public class ResizeableArrayBagTest
      * expected difference() result is {3}
      */
     @Test
-    public void shouldGiveDifferenceLinkedBag1HasRow(){
+    public void shouldGiveDifferenceResizBag1HasRow(){
         BagInterface<Integer> differenceExpect = new ResizeableArrayBag<Integer>();      //creates an expected answer key of (3)
             differenceExpect.add(3);
         BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag1 of (1,2,2,3,3)
@@ -198,7 +198,7 @@ public class ResizeableArrayBagTest
      * expected difference() result is {1}
      */
     @Test
-    public void shouldGiveDifferenceLinkedBag2HasRow(){
+    public void shouldGiveDifferenceResizBag2HasRow(){
         BagInterface<Integer> differenceExpect = new ResizeableArrayBag<Integer>();      //creates an expected answer key of (1)
             differenceExpect.add(1);
         BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag1 of (1,2,1,3,1)
@@ -224,7 +224,7 @@ public class ResizeableArrayBagTest
      * expected difference() result is {1}
      */
     @Test
-    public void shouldGiveDifferenceLinkedBagBothNoRow(){
+    public void shouldGiveDifferenceResizBagBothNoRow(){
         BagInterface<Integer> differenceExpect = new ResizeableArrayBag<Integer>();      //creates an expected answer key of (1)
             differenceExpect.add(1);
         BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag1 of (1,2,3,4,2)
