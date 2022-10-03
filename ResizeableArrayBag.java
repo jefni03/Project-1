@@ -61,7 +61,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
         boolean result = true;
         if(isArrayFull())
         {
-            result = false;
+            doubleCapacity();
         }
         else
         {
