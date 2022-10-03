@@ -149,9 +149,8 @@ public class ResizeableArrayBagTest
     */
     @Test
     public void shouldGiveDifferenceBothResizArrayBagsHaveRow(){
-        BagInterface<Integer> differenceExpect = new ResizeableArrayBag<Integer>();      //creates an expected answer key of (1,4)
+        BagInterface<Integer> differenceExpect = new ResizeableArrayBag<Integer>();      //creates an expected answer key of (1)
             differenceExpect.add(1);
-            differenceExpect.add(4);
         BagInterface<Integer> bag1 = new ResizeableArrayBag<Integer>();      //creates a resiz array bag1 of (1,2,2,3,4)
             bag1.add(1);
             bag1.add(2);
