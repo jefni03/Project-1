@@ -8,7 +8,10 @@
 ## Justin Nguyen
 ## Peter Nguyen
 ##
-##
+# _Roles_
+## Jeffrey Ni - BagDriver, LinkedBag general methods, and LinkedBag Intersection Union and Difference Methods
+## Justin Nguyen - All Unit Testing, ResizableArrayBag intersection, some of the LinkedBag methods,
+## Peter Nguyen - ResizableArrayBag general methods, ResizeableArrayBag union+difference, testing on ResizableArrayBag
 ##
 # _CPP Emails_
 ## jeffreyni@cpp.edu
