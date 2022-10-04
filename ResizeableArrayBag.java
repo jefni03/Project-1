@@ -255,7 +255,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
 
     /**
-     * Takes in a bag and creates a new bag putting everything into it
+     * Takes in a bag and creates a new bag putting everything into it and outputs a new array with everything in it.
      * @param bag
      * @return
      */
@@ -277,7 +277,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
 
     /**
-     * Takes in a bag and only puts what occurs in both bags.
+     * Takes in a bag and only puts what occurs in both bags and outputs a new array with what is left.
      * @param bag
      * @return
      */
@@ -306,7 +306,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
 
     /**
-     * Takes in a bag and subtracts it, and outputs what is left.
+     * Takes in a bag and subtracts it, and outputs what a new array with what is left.
      * @param bag
      * @return
      */
