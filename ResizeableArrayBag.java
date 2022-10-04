@@ -19,6 +19,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
 
     /**
      * Constructs an empty ResizeableArrayBag
+     * @param capacity
      */
     public ResizeableArrayBag(int capacity)
     {
@@ -35,8 +36,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     }
 
 
-
-    // Throws an exception if this object is not initialized.
+    /**
+     * Throws an exception if this object is not initialized.
+     */
     private void checkIntegrity()
     {
       if(!integrityOK)
@@ -55,7 +57,10 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
         return numberOfEntries;
     }
 
-    // Throws an exception if the client requests a capacity that is too large.
+    /**
+     * Throws an exception if the client requests a capacity that is too large.
+     * @param capacity
+     */
     private void checkCapacity(int capacity)
     {
         if(capacity > MAX_CAPACITY)
@@ -65,9 +70,10 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     }
 
 
-
-    /**Doubles the size of the array bag.
-    Precondition: checkIntegrity has been called.*/
+    /**
+     * Doubles the size of the array bag.
+     * Precondition: checkIntegrity has been called.
+     */
     private void doubleCapacity()
     {
         int newLength = 2 * bag.length;
@@ -163,10 +169,13 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     }
 
 
-
-    // Locates a given entry within the array bag.
-    // Returns the index of the entry, if located, or -1 otherwise.
-    // Precondition: checkIntegrity has been called.
+    /**
+     * Locates a given entry within the array bag.
+     * Returns the index of the entry, if located, or -1 otherwise.
+     * Precondition: checkIntegrity has been called.
+     * @param anEntry
+     * @return
+     */
     private int getIndexOf(T anEntry)
     {
         int where = -1;
@@ -213,19 +222,24 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     }
 
 
-
-    //returns a boolean to tell whether it is full or not
+    /**
+     *
+     * @return a boolean to tell whether it is full or not
+     */
     private boolean isArrayFull()
     {
         return numberOfEntries == bag.length;
     }
 
 
-
-    // Removes and returns the entry at a given index within the array bag.
-    // If no such entry exists, returns null.
-    // Preconditions: 0 <= givenIndex < numberOfEntries;
-    //                checkIntegrity has been called.
+    /**
+     * Removes and returns the entry at a given index within the array bag.
+     * If no such entry exists, returns null.
+     * Preconditions: 0 <= givenIndex < numberOfEntries;
+     *                checkIntegrity has been called.
+     * @param givenIndex
+     * @return
+     */
     private T removeEntry(int givenIndex)
     {
         T result = null;
@@ -240,7 +254,11 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     }
 
 
-
+    /**
+     * Takes in a bag and creates a new bag putting everything into it and outputs a new array with everything in it.
+     * @param bag
+     * @return
+     */
     public BagInterface<T> union(BagInterface<T> bag) 
     {
         BagInterface <T> result = new ResizeableArrayBag < >();
@@ -256,7 +274,11 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     }
 
 
-
+    /**
+     * Takes in a bag and only puts what occurs in both bags and outputs a new array with what is left.
+     * @param bag
+     * @return
+     */
     public BagInterface<T> intersection(BagInterface<T> bag) 
     {
         BagInterface<T> result = new ResizeableArrayBag<T>();  
@@ -282,7 +304,11 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     }
 
 
-    
+    /**
+     * Takes in a bag and subtracts it, and outputs what a new array with what is left.
+     * @param bag
+     * @return
+     */
     public BagInterface<T> difference(BagInterface<T> bag) 
     {
         BagInterface <T> result = new ResizeableArrayBag < >();
