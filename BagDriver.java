@@ -7,7 +7,7 @@ public class BagDriver
     public static void main(String args[])
     {
     /**
-     * Creaates two bags of LinkedBag Type that takes String values
+     * Creates two bags of LinkedBag Type that takes String values
      */
     BagInterface <String> bag1 = new LinkedBag <String>();
     BagInterface <String> bag2 = new LinkedBag <String>();
@@ -22,6 +22,7 @@ public class BagDriver
     bag2.add("b");
     bag2.add("d");
     bag2.add("e");
+
 
     /**
      * Methods are called with the results printed out 
