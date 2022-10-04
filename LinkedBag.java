@@ -3,7 +3,6 @@
  * and the reference to the next linked object.
  * Implements BagInterface using generic type T
  */
-
 public class LinkedBag<T> implements BagInterface<T>
 {
     private Node firstNode;
@@ -196,36 +195,50 @@ public class LinkedBag<T> implements BagInterface<T>
         return array;
     }
 
+    /**
+     * Will find the union of LinkedBags by combining
+     * all the data/entries from both bags into a newly made result bag
+     * @param bag one of the bags you want to find intersection of
+     * @return the union of the two bags
+     */
     public BagInterface<T> union(BagInterface<T> bag)
     {
-        BagInterface <T> result = new LinkedBag <>();
-        for (T obj : bag.toArray()) 
+        BagInterface<T> result = new LinkedBag<>();
+        for (T data : bag.toArray()) 
         {
-        result.add(obj);
+        result.add(data);
         }
-        for (T obj : this.toArray())
+        for (T data : this.toArray())
         {
-            result.add(obj);
+            result.add(data);
         }
         return result;
     }
 
+    /**
+     * Will find the intersection of LinkedBags by
+     * first making a copy of the parameter bag (bag2)
+     * then going through bag1 and comparing it to bag2.
+     * @param bag one of the bags you want to find intersection of
+     * @return the intersection of the two bags
+     */
     public BagInterface<T> intersection(BagInterface<T> bag)
     {
-        BagInterface<T> result = new LinkedBag<T>();
-        @SuppressWarnings("unchecked")
-        T[] bagTwoArrayCopy = (T[]) new Object[bag.getCurrentSize()];
-        T[] bagOneArray = this.toArray();
+        BagInterface<T> result = new LinkedBag<T>();   
+                        
         T[] bagTwoArray = bag.toArray();
-        for(int i=0; i<bag.getCurrentSize(); i++){
-            bagTwoArrayCopy[i]=bagTwoArray[i];
-        }
+        BagInterface<T> bagTwoCopy = new LinkedBag<>();     //makes a copy of bag two (the parameter bag) to avoid shallow copies
+        for(int i=0; i<bag.getCurrentSize(); i++){         
+            bagTwoCopy.add(bagTwoArray[i]);                 
+        }        
 
-        for(int i=0; i<this.getCurrentSize(); i++){
-            for(int j=0; j<bag.getCurrentSize(); j++){
-                if(bagOneArray[i]==bagTwoArrayCopy[j]){
-                    result.add(bagOneArray[i]);
-                    bagTwoArrayCopy[j]=null;
+        T[] bagTwoCopyArray = bagTwoCopy.toArray(); 
+        T[] bagOneArray = this.toArray();       
+        for(int i=0; i<this.getCurrentSize(); i++){             //outer loop goes through bag1 (this)
+            for(int j=0; j<bag.getCurrentSize(); j++){          //inner loop goes through bag2 (the parameter bag)
+                if(bagOneArray[i].equals(bagTwoCopyArray[j])){
+                    result.add(bagOneArray[i]);                 
+                    bagTwoCopyArray[j]=null;                    
                     break;
                 }
             }
@@ -233,20 +246,28 @@ public class LinkedBag<T> implements BagInterface<T>
         return result;
     }
 
+    /**
+     * Will find the difference of LinkedBags by 
+     * adding all the elements of bag1 (this) to the result bag
+     * comparing the result bag to bag2 (the parameter bag) and removing 
+     * entries from result if it matches with bag2.
+     * @param bag one of the bags to find the difference
+     * @return the difference of the two bags
+     */
     public BagInterface<T> difference(BagInterface<T> bag)
     {
         BagInterface <T> result = new LinkedBag<>();
-        T[] array = this.toArray();
-        for (T object : array) 
+        T[] bag1Array = this.toArray();
+        for (T data : bag1Array) 
         {
-        result.add(object);
+        result.add(data);
         }
-        T[] array2 = bag.toArray();
-        for (T object : array2) 
+        T[] bag2Array = bag.toArray();
+        for (T data : bag2Array) 
         {
-            if(result.contains(object))
+            if(result.contains(data))
             {
-            result.remove(object);
+            result.remove(data);
             }
         }
         return result;
