@@ -42,6 +42,9 @@ public class LinkedBag<T> implements BagInterface<T>
      */
     public boolean add(T entry)
     {
+        if(entry==null){
+            throw new IllegalArgumentException("Cannot add null entry into Linked bag");
+        }
         Node newNode = new Node(entry);
         newNode.next = firstNode;
         firstNode = newNode;

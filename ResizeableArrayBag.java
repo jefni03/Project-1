@@ -89,6 +89,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     */
     public boolean add(T newEntry)
     {
+        if(newEntry==null){
+            throw new IllegalArgumentException("Cannot add null entry into ResizeableArrayBag");
+        }
         checkIntegrity();
         boolean result = true;
         if(isArrayFull())
