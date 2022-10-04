@@ -336,17 +336,17 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
             throw new IllegalArgumentException("Cannot find difference of a bag that doesn't exist/null");
         }
         BagInterface <T> result = new ResizeableArrayBag < >();
-        T[] array = this.toArray();
-        for (T index : array) 
+        T[] firstBag = this.toArray();
+        for (T data : firstBag) 
         {
-            result.add(index);
+            result.add(data);
         }
         T[] secondBag = bag.toArray();
-        for (T index : secondBag)
+        for (T data : secondBag)
         {
-            if(result.contains(index))
+            if(result.contains(data))
             {
-                result.remove(index);
+                result.remove(data);
             }
         }
         return result;
