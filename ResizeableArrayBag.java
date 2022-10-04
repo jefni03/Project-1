@@ -125,6 +125,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     */
     public boolean remove(T anEntry)
     {
+        if(anEntry==null){
+            throw new IllegalArgumentException("Cannot remove a null from ResizeableArrayBag");
+        }
         checkIntegrity();
         int index = getIndexOf(anEntry);
         T result = removeEntry(index);
@@ -158,6 +161,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
     */
     public int getFrequencyOf(T anEntry)
     {
+        if(anEntry==null){
+            throw new IllegalArgumentException("Cannot count the frequency of a null entry from ResizeableArrayBag");
+        }
         checkIntegrity();
         int counter = 0;
 
@@ -181,6 +187,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
      */
     private int getIndexOf(T anEntry)
     {
+        if(anEntry==null){
+            throw new IllegalArgumentException("Cannot find the index of a null entry from ResizeableArrayBag");
+        }
         int where = -1;
         boolean found = false;
         int index = 0;
@@ -204,6 +213,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
      @return  True if the bag contains anEntry, or false if not. */
     public boolean contains(T anEntry)
     {
+        if(anEntry==null){
+            throw new IllegalArgumentException("Cannot find if bag contains a null entry in ResizeableArrayBag");
+        }
         checkIntegrity();
         return getIndexOf(anEntry)>-1;
     }
@@ -264,6 +276,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
      */
     public BagInterface<T> union(BagInterface<T> bag) 
     {
+        if(bag==null){
+            throw new IllegalArgumentException("Cannot find union of a bag that doesn't exist/null");
+        }
         BagInterface <T> result = new ResizeableArrayBag < >();
         for (T data : this.toArray()) 
         {
@@ -284,6 +299,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
      */
     public BagInterface<T> intersection(BagInterface<T> bag) 
     {
+        if(bag==null){
+            throw new IllegalArgumentException("Cannot find intersection of a bag that doesn't exist/null");
+        }
         BagInterface<T> result = new ResizeableArrayBag<T>();  
 
         T[] bagTwoArray = bag.toArray();
@@ -314,6 +332,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T>
      */
     public BagInterface<T> difference(BagInterface<T> bag) 
     {
+        if(bag==null){
+            throw new IllegalArgumentException("Cannot find difference of a bag that doesn't exist/null");
+        }
         BagInterface <T> result = new ResizeableArrayBag < >();
         T[] array = this.toArray();
         for (T index : array) 

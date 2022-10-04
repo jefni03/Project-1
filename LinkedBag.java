@@ -84,6 +84,9 @@ public class LinkedBag<T> implements BagInterface<T>
      */
     public boolean remove(T entry)
     {
+        if(entry==null){
+            throw new IllegalArgumentException("Cannot remove a null entry from Linked Bag");
+        }
          boolean result = false;
          Node nodeN = getReferenceTo(entry);
          if (nodeN != null)
@@ -106,6 +109,9 @@ public class LinkedBag<T> implements BagInterface<T>
      * @return the reference to the node that the object/data is located in
      */
     private Node getReferenceTo(T entry){
+        if(entry==null){
+            throw new IllegalArgumentException("Cannot find a reference to a null entry in Linked Bag");
+        }
         boolean found = false;
         Node currentNode = firstNode;
         while(!found && (currentNode!=null)){
@@ -138,6 +144,9 @@ public class LinkedBag<T> implements BagInterface<T>
      */
     public int getFrequencyOf(T entry)
     {
+        if(entry==null){
+            throw new IllegalArgumentException("Cannot find the frequency of a null entry in Linked Bag");
+        }
         int frequency = 0;
         int count = 0;
         Node currentNode = firstNode;
@@ -161,6 +170,9 @@ public class LinkedBag<T> implements BagInterface<T>
      */
     public boolean contains(T entry)
     {
+        if(entry==null){
+            throw new IllegalArgumentException("Cannot find a null entry in Linked Bag");
+        }
         boolean found = false;
         Node currentNode = firstNode;
         while(!found && (currentNode != null))
@@ -206,6 +218,9 @@ public class LinkedBag<T> implements BagInterface<T>
      */
     public BagInterface<T> union(BagInterface<T> bag)
     {
+        if(bag==null){
+            throw new IllegalArgumentException("Cannot find union of bag that doesn't exist/null");
+        }
         BagInterface<T> result = new LinkedBag<>();
         for (T data : bag.toArray()) 
         {
@@ -227,6 +242,9 @@ public class LinkedBag<T> implements BagInterface<T>
      */
     public BagInterface<T> intersection(BagInterface<T> bag)
     {
+        if(bag==null){
+            throw new IllegalArgumentException("Cannot find intersection of bag that doesn't exist/null");
+        }
         BagInterface<T> result = new LinkedBag<T>();   
                         
         T[] bagTwoArray = bag.toArray();
@@ -259,6 +277,9 @@ public class LinkedBag<T> implements BagInterface<T>
      */
     public BagInterface<T> difference(BagInterface<T> bag)
     {
+        if(bag==null){
+            throw new IllegalArgumentException("Cannot find difference of bag that doesn't exist/null");
+        }
         BagInterface <T> result = new LinkedBag<>();
         T[] bag1Array = this.toArray();
         for (T data : bag1Array) 
